@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+namespace ConsoleApp10
+{
+    class Program
+    {
+        private static int counter;
+        static bool Is_Present(int[] Vector, int Number)
+        {
+            int Left = 0, Right = Vector.Length - 1, Middle;
+            while (Left <= Right)
+            {
+                Middle = (Left + Right) / 2;
+                if (Vector[Middle] == Number) return true;
+                else if (Vector[Middle] > Number) Right = Middle - 1;
+                else Left = Middle + 1;
+            }
+            return false;
+        }
+
+        static bool Is_Present_Counter(int[] Vector, int Number)
+        {
+            int Left = 0, Right = Vector.Length - 1, Middle;
+            while (Left <= Right)
+            {
+                Middle = (Left + Right) / 2;
+                counter++;
+                if (Vector[Middle] == Number) return true;
+                else if (Vector[Middle] > Number) Right = Middle - 1;
+                else Left = Middle + 1;
+            }
+            return false;
+        }
+
+        static void Main(string[] args)
+        {
+            int looking_Value = 0;
+            //for (int i = 0; i < Math.Max(2,38); i++)
+            for (int i = 2; i < 100; i++)
+            {
+                Random rand = new Random();
+
+              
+                int[] tab = new int[i];
+                for (int j = 0; j < tab.Length; j++)
+                {
+                    tab[j] = rand.Next(1, 1000);
+                }
+                counter = 0;
+
+                long start = Stopwatch.GetTimestamp();
+                var   result = Is_Present(tab, looking_Value);
+                long stop = Stopwatch.GetTimestamp();
+                result = Is_Present_Counter(tab, looking_Value);
+                Console.WriteLine(i + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter);
+            }
+        }
+    }
+}
