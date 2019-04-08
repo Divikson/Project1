@@ -1,62 +1,65 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
 
-namespace ConsoleApp10
+
+namespace ConsoleApp1
 {
     class Program
     {
         private static int counter;
-        static bool Is_Present(int[] Vector, int Number)
+
+        public static long simple_search(long[] tab, long a)
         {
-            int Left = 0, Right = Vector.Length - 1, Middle;
-            while (Left <= Right)
+            for (long i = 0; i < tab.Length; i++)
             {
-                Middle = (Left + Right) / 2;
-                if (Vector[Middle] == Number) return true;
-                else if (Vector[Middle] > Number) Right = Middle - 1;
-                else Left = Middle + 1;
+                if (tab[i] == a) return i;
             }
-            return false;
+            return -1;
         }
 
-        static bool Is_Present_Counter(int[] Vector, int Number)
+        public static long simple_search_founder(long[] tab, long a)
         {
-            int Left = 0, Right = Vector.Length - 1, Middle;
-            while (Left <= Right)
+            counter = 0;
+            for (long i = 0; i < tab.Length; i++)
             {
-                Middle = (Left + Right) / 2;
                 counter++;
-                if (Vector[Middle] == Number) return true;
-                else if (Vector[Middle] > Number) Right = Middle - 1;
-                else Left = Middle + 1;
+                if (tab[i] == a) return i;
+
             }
-            return false;
+            return -1;
         }
 
         static void Main(string[] args)
         {
-            int looking_Value = 0;
-            for (int i = 2000000; i < Math.Max(2,30); i +=100000)
-            {
+            Random rand = new Random();
+            long looking_Value = 100;
+            long result;
 
-              
-                int[] tab = new int[i];
-                for (int j = 0; j < tab.Length; j++)
+            Console.WriteLine("");
+            for (int k = 2000000; k < (long)Math.Pow(2, 30); k += 100000)
+            {
+                long[] tab = new long[k];
+                for (int i = 0; i < tab.Length; i++)
                 {
-                    tab[j] = j+1;
+                    long bla = (long)Math.Pow(2, 30);
+                    tab[i] = (long)((rand.NextDouble() * 2.0 - 1.0) * long.MaxValue);
+                    if (i== tab.Length/2)
+                    {
+                         looking_Value = tab[i];
+                    }
                 }
-                counter = 0;
 
                 long start = Stopwatch.GetTimestamp();
-                var   result = Is_Present(tab, looking_Value);
+                result = simple_search(tab, looking_Value);
                 long stop = Stopwatch.GetTimestamp();
-                result = Is_Present_Counter(tab, looking_Value);
-                Console.WriteLine(i + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter);
+                result = simple_search_founder(tab, looking_Value);
+                Console.WriteLine(k + ";" + looking_Value + ";" + result + ";" + (stop - start) + ";" + counter);
             }
+
         }
     }
 }
