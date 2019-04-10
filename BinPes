@@ -10,7 +10,7 @@ namespace ConsoleApp10
     class Program
     {
         private static int counter;
-        static bool Is_Present(int[] Vector, int Number)
+        static bool Is_Present(long[] Vector, long Number)
         {
             int Left = 0, Right = Vector.Length - 1, Middle;
             while (Left <= Right)
@@ -23,7 +23,7 @@ namespace ConsoleApp10
             return false;
         }
 
-        static bool Is_Present_Counter(int[] Vector, int Number)
+        static bool Is_Present_Counter(long[] Vector, long Number)
         {
             int Left = 0, Right = Vector.Length - 1, Middle;
             while (Left <= Right)
@@ -40,11 +40,11 @@ namespace ConsoleApp10
         static void Main(string[] args)
         {
             int looking_Value = 0;
-            for (int i = 2000000; i < Math.Max(2,30); i +=100000)
+            for (int i = 2000000; i < (long)Math.Pow(2, 30); i += 100000)
             {
 
               
-                int[] tab = new int[i];
+                long[] tab = new long[i];
                 for (int j = 0; j < tab.Length; j++)
                 {
                     tab[j] = j+1;
