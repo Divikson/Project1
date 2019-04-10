@@ -47,8 +47,8 @@ namespace ConsoleApp10
                 long[] tab = new long[i];
                 for (long j = 0; j < tab.Length; j++)
                 {
-                   tab[j] = j + 1;
-                    if (i == (tab.Length / 2)-1)
+                    tab[j] = j + 1;
+                    if (j == (tab.Length / 2) - 1)
                     {
                         looking_Value = tab[j];
                     }
